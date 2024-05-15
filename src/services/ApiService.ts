@@ -23,7 +23,16 @@ class ApiService {
     }
   }; 
 
-  
+  fetchProductsData = async () => {
+    const endpoint = 'products.json';
+   
+    try {
+      const productsData = await this.get(endpoint);
+      return productsData;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 export default ApiService;

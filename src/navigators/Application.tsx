@@ -3,8 +3,7 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {COLORS} from '@/theme/colors';
-import {HomeView} from '@/screens/Home/HomeView';
+import {HomeView} from '../screens';
 
 const Stack = createStackNavigator();
 
