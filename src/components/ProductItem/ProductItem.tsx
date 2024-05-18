@@ -2,6 +2,7 @@ import {styled} from 'nativewind';
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {Shoe, StockStatus} from '../../models/products_response';
+import StringService from '../../services/StringService';
 
 interface ProductItemProps {
   onTap: () => void;
@@ -38,11 +39,16 @@ const ProductItem: React.FC<ProductItemProps> = ({onTap, product}) => {
           </StyledText>
 
           <StyledView className="flex-row mt-5">
-            <StyledText className="font-bold text-blue-600">{`${product.price.amount} ${product.price.currency}`}</StyledText>
+            <StyledText
+              className={`font-bold ${
+                product.stockStatus === StockStatus.IN_STOCK
+                  ? 'text-emerald-600'
+                  : 'text-red-600'
+              }`}>{`${product.price.amount} ${product.price.currency}`}</StyledText>
           </StyledView>
 
           <StyledView className="flex-row items-center">
-            <StyledText className="text-sm mr-1 mt-1">Colour:</StyledText>
+            <StyledText className="text-sm mr-1 mt-1">{StringService.strings.color}</StyledText>
             <StyledText className="text-sm mr-1 mt-1 capitalize">
               {product.colour}
             </StyledText>

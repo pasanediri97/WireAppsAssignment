@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
+  Alert,
   Image,
   SafeAreaView,
   ScrollView,
@@ -12,9 +13,10 @@ import {AppDispatch} from '../../../redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigators/RootStackParamList';
 import {RouteProp} from '@react-navigation/native';
-import {Loader} from '../../components/loader';
 import {styled} from 'nativewind';
 import {StockStatus} from '../../models/products_response';
+import {addToCart} from '../../../redux/thunks/productsThunk';
+import StringService from '../../services/StringService';
 
 type ItemDetailsViewProps = {
   navigation: StackNavigationProp<RootStackParamList, 'ItemDetailsView'>;
@@ -25,6 +27,8 @@ const ItemDetailsView: React.FC<ItemDetailsViewProps> = ({
   route,
   navigation,
 }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const {item} = route.params || {};
 
   const StyledScrollView = styled(ScrollView);
@@ -73,13 +77,13 @@ const ItemDetailsView: React.FC<ItemDetailsViewProps> = ({
           </StyledText>
 
           <StyledView className="flex-row items-center mt-1 mr-1">
-            <StyledText className="text-lg capitalize ">{`Colour: ${item.colour}`}</StyledText>
+            <StyledText className="text-lg capitalize ">{`${StringService.strings.color} ${item.colour}`}</StyledText>
           </StyledView>
           <StyledView className="flex-row items-center mt-1">
-            <StyledText className="text-base">{`SKU: ${item.SKU}`}</StyledText>
+            <StyledText className="text-base">{`${StringService.strings.sku} ${item.SKU}`}</StyledText>
           </StyledView>
           <StyledText className="text-base mr-1 mt-4 text-red-900">
-            Select Size :
+            {StringService.strings.selectSize}
           </StyledText>
           <StyledView className="flex-row items-center mt-2">
             {item.sizes.map((value: string, _: any) => SizeItem(value))}
@@ -108,9 +112,32 @@ const ItemDetailsView: React.FC<ItemDetailsViewProps> = ({
         </StyledView>
       </StyledScrollView>
       <StyledView className="absolute bottom-10 w-full">
-        <TouchableOpacity>
-          <StyledView className='h-10 self-center bg-orange-600 w-3/4 items-center justify-center rounded-lg'>
-            <StyledText className='text-lg text-white font-semibold'>Add to cart</StyledText>
+        <TouchableOpacity
+          onPress={() => {
+            if (!selectedSize) {
+              Alert.alert(
+                StringService.errorMessages.error,
+                StringService.errorMessages.selectSize,
+                [
+                  {
+                    text: StringService.errorMessages.cancel,
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {
+                    text: StringService.errorMessages.ok,
+                    onPress: () => console.log('OK Pressed'),
+                  },
+                ],
+              );
+            } else {
+              dispatch(addToCart({shoe: item, size: selectedSize}));
+            }
+          }}>
+          <StyledView className="h-10 self-center bg-orange-600 w-3/4 items-center justify-center rounded-lg">
+            <StyledText className="text-lg text-white font-semibold">
+              {StringService.strings.addToCart}
+            </StyledText>
           </StyledView>
         </TouchableOpacity>
       </StyledView>

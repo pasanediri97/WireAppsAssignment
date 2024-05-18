@@ -10,8 +10,7 @@ import {
 import {styles} from './styles';
 import {fetchProductsData} from '../../../redux/thunks/productsThunk';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../../navigators/RootStackParamList';
-import {useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../navigators/RootStackParamList'; 
 import {Loader} from '../../components/loader';
 import {styled} from 'nativewind';
 import {ProductItem} from '../../components/ProductItem/ProductItem';

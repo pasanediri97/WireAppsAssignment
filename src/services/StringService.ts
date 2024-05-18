@@ -1,13 +1,19 @@
 class StringService {
   static strings = {
-    test: 'Test', 
+    totalPrice: 'Total Price:',
+    noItemsAvailable: 'No Items available in the cart',
+    selectSize: 'Select Size :',
+    addToCart: 'Add to cart',
+    color: 'Colour:',
+    sku: 'SKU:',
   };
 
-  static errorMessages = { 
+  static errorMessages = {
     serverError: 'Internal server error',
-  };
-
-  static permissionStrings = { 
+    error: 'Error',
+    ok: 'Ok',
+    cancel: 'Cancel',
+    selectSize: "Please select size!",
   };
 }
 
