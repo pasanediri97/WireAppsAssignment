@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FlatList, RefreshControl, SafeAreaView, View} from 'react-native';
+import {FlatList, RefreshControl, SafeAreaView, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   AppDispatch,
@@ -37,14 +37,16 @@ const HomeView: React.FC<HomeViewProps> = () => {
     dispatch(fetchProductsData());
   }, [dispatch]);
 
-  useEffect(() => {}, [apiError]);
+  useEffect(() => {
+    console.log(productsData?.data);
+  }, [productsData]);
 
   const handleRefresh = () => {
     dispatch(fetchProductsData());
   };
 
   return (
-    <StyledSafeAreaView className="flex">
+    <StyledSafeAreaView className="flex bg-white">
       <FlatList
         contentContainerStyle={styles.scrollView}
         refreshControl={

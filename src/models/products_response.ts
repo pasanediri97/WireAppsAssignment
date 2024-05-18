@@ -1,4 +1,4 @@
-enum StockStatus {
+export enum StockStatus {
   IN_STOCK = "IN STOCK",
   OUT_OF_STOCK = "OUT OF STOCK",
 }

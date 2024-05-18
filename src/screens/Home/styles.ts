@@ -60,8 +60,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 16,
   },
-  scrollView: {
-    flex: 1, 
+  scrollView: { 
+    flexGrow:1,
     alignItems: 'center',
     justifyContent: 'center',
   },
