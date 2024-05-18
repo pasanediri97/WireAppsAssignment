@@ -17,7 +17,7 @@ interface Price {
   currency: string;
 }
 
-interface Shoe {
+export interface Shoe {
   id: string;
   SKU: string;
   name: string;
@@ -30,7 +30,7 @@ interface Shoe {
   description: string;
 }
 
-interface ProductsResponse {
+export interface ProductsResponse {
   result: string;
   data: Shoe[];
 }

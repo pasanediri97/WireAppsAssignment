@@ -3,12 +3,15 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {HomeView} from '../screens';
+import {HomeView, ItemDetailsView} from '../screens';
+import { COLORS } from '../theme/colors';
 
 const Stack = createStackNavigator();
 
 const stackScreenOptions: StackNavigationOptions = {
-  headerShown: false,
+  headerShown: true,
+  title:'',
+  headerBackTitleVisible:false, 
 };
 
 function ApplicationNavigator() {
@@ -16,6 +19,7 @@ function ApplicationNavigator() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={stackScreenOptions}>
         <Stack.Screen name="HomeView" component={HomeView} />
+        <Stack.Screen name="ItemDetailsView"  component={ItemDetailsView} />
       </Stack.Navigator>
     </NavigationContainer>
   );

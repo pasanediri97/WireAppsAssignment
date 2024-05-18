@@ -15,15 +15,13 @@ import {useNavigation} from '@react-navigation/native';
 import {Loader} from '../../components/loader';
 import {styled} from 'nativewind';
 import {ProductItem} from '../../components/ProductItem/ProductItem';
+import {ProductsResponse} from '../../models/products_response';
 
 type HomeViewProps = {
   navigation: StackNavigationProp<RootStackParamList, 'HomeView'>;
 };
 
-const HomeView: React.FC<HomeViewProps> = () => {
-  const navigation =
-    useNavigation<StackNavigationProp<RootStackParamList, 'HomeView'>>();
-
+const HomeView: React.FC<HomeViewProps> = ({navigation}) => {
   const dispatch = useDispatch<AppDispatch>();
   const productsData: ProductsResponse | null = useSelector(selectProductsData);
   const loading = useSelector(selectProductsLoading);
@@ -56,8 +54,8 @@ const HomeView: React.FC<HomeViewProps> = () => {
         renderItem={({item, index}) => {
           return (
             <ProductItem
-              onTap={id => {
-                console.log(id);
+              onTap={() => {
+                navigation.navigate('ItemDetailsView', {item: item});
               }}
               product={item}
             />

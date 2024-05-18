@@ -1,10 +1,10 @@
 import {styled} from 'nativewind';
 import React from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {StockStatus} from '../../models/products_response';
+import {Shoe, StockStatus} from '../../models/products_response';
 
 interface ProductItemProps {
-  onTap: (id: string) => void;
+  onTap: () => void;
   product: Shoe;
 }
 const StyledView = styled(View);
@@ -24,9 +24,7 @@ const SizeItem: React.FC<string> = size => {
 
 const ProductItem: React.FC<ProductItemProps> = ({onTap, product}) => {
   return (
-    <StyledTouchableOpacity
-      className="w-full  p-5 "
-      onPress={() => onTap(product.id)}>
+    <StyledTouchableOpacity className="w-full  p-5 " onPress={() => onTap()}>
       <StyledView className="flex-row w-full bg-zinc-100 rounded py-2">
         <StyledImage
           className="w-28 h-28 rounded m-2"
@@ -40,8 +38,14 @@ const ProductItem: React.FC<ProductItemProps> = ({onTap, product}) => {
           </StyledText>
 
           <StyledView className="flex-row mt-5">
-            <StyledText>{product.price.amount}</StyledText>
-            <StyledText> {product.price.currency}</StyledText>
+            <StyledText className="font-bold text-blue-600">{`${product.price.amount} ${product.price.currency}`}</StyledText>
+          </StyledView>
+
+          <StyledView className="flex-row items-center">
+            <StyledText className="text-sm mr-1 mt-1">Colour:</StyledText>
+            <StyledText className="text-sm mr-1 mt-1 capitalize">
+              {product.colour}
+            </StyledText>
           </StyledView>
 
           <StyledText
@@ -52,11 +56,6 @@ const ProductItem: React.FC<ProductItemProps> = ({onTap, product}) => {
             }`}>
             {product.stockStatus}
           </StyledText>
-
-          <StyledView className="flex-row items-center">
-            <StyledText className="text-sm mr-1 mt-1">Sizes:</StyledText>
-            {product.sizes.map((value: string, _: any) => SizeItem(value))}
-          </StyledView>
         </StyledView>
       </StyledView>
     </StyledTouchableOpacity>
